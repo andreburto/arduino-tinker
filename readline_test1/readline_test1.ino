@@ -1,3 +1,5 @@
+include "Hello.h";
+
 char words[255];
 int wcnt = 0;
 
