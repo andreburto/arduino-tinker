@@ -1,30 +1,58 @@
 #ifndef HELLO
 #define HELLO
+#include "Arduino.h";
 #include "Hello.h";
 
 Hello::Hello() {
-        this->start = this->name;
+  this->start = this->name;
+  Serial.begin(9600);
 }
  
-Hello::~Hello() { }
- 
+Hello::~Hello() {
+  Serial.end();
+}
+
 void Hello::getName() {
-        char gn[100];
-        this->setName(gn);
+  // Set the variables
+  char words[255];
+  int wcnt = 0;
+  
+  // Ask
+  Serial.println("What is your name?");
+  
+  // Hold until there's data
+  while (Serial.available() == 0) { delay(100); }
+  
+  // Read the incoming data
+  while (Serial.available() > 0) {
+    char temp = Serial.read();
+    words[wcnt] = temp;
+    wcnt++;
+  }
+  
+  // Terminate the character array
+  words[wcnt] = '\0';
+  
+  // Set the name
+  this->setName(words);
 }
  
 void Hello::setName(char *name) {
-        int c = 0;
-        while (*name != '\0') {
-                this->name[c] = *name;
-                name++;
-                c++;
-        }
-        this->name[c] = '\0';
+  int c = 0;
+  while (*name != '\0' && c < 255) {
+    this->name[c] = *name;
+    name++;
+    c++;
+  }
+  this->name[c] = '\0';
 }
  
 void Hello::sayName() {
-        //cout << "Your name is: " << this->start << "." << endl;
+  String temp = String("Your name is: ");
+  temp.concat(this->name);
+  temp += ".";
+  temp += '\0';
+  Serial.println(temp);
 }
 
 #endif

@@ -1,28 +1,12 @@
-include "Hello.h";
-
-char words[255];
-int wcnt = 0;
+#include "Hello.h";
 
 void setup() {
-  Serial.begin(9600);
+  Hello* h = new Hello();
+  h->getName();
+  h->sayName();
+  h->~Hello();
 }
 
 void loop() {
-  if (Serial.available() > 0) {
-    char temp = Serial.read();
-    words[wcnt] = temp;
-    wcnt++;
-    
-    //Serial.println(temp);
-    
-    if (temp == '\n') {
-      int tcnt = 0;
-      while(tcnt < wcnt) {
-        Serial.print(words[tcnt]);
-        tcnt++;
-      }
-      //Serial.print('\n');
-      wcnt=0;
-    }
-  }
+
 }
