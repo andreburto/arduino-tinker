@@ -81,9 +81,9 @@ void Morse::say(char letters[255]) {
           break;
         }
       }
-      Serial.print(this->code[ltr][0]);
+      Serial.print(letter);
       while(this->code[ltr][flashType] != '\0') {
-        Serial.print(this->code[ltr][flashType]);
+        //Serial.print(this->code[ltr][flashType]);
         delay(this->unit);
         if (this->code[ltr][flashType] == '.') dot();
         if (this->code[ltr][flashType] == '-') dash();

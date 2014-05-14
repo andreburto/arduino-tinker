@@ -32,12 +32,14 @@ void loop() {
         } 
       }
     }
-    
+    Serial.println("1");
     // Feed the array in
     m->say(msg);
-    
+    Serial.println("1");
     // Empty the msg array
     nullMsg();
+    mcnt = 0;
+    Serial.println("1");
   }
 }
 
