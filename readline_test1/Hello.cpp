@@ -26,12 +26,18 @@ void Hello::getName() {
   // Read the incoming data
   while (Serial.available() > 0) {
     char temp = Serial.read();
-    words[wcnt] = temp;
-    wcnt++;
+    if (temp != '\n' && temp != '\r') {
+      words[wcnt] = temp;
+      wcnt++;
+    }
   }
   
   // Terminate the character array
-  words[wcnt] = '\0';
+  if (wcnt < 255) {
+    words[wcnt] = '\0';
+  } else {
+    words[255] = '\0';
+  }
   
   // Set the name
   this->setName(words);
@@ -49,9 +55,8 @@ void Hello::setName(char *name) {
  
 void Hello::sayName() {
   String temp = String("Your name is: ");
-  temp.concat(this->name);
+  temp += this->name;
   temp += ".";
-  temp += '\0';
   Serial.println(temp);
 }
 
