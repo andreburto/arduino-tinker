@@ -3,3 +3,9 @@
  *****/
  
 // VARIABLES
+
+void setup() {
+}
+
+void loop() {
+}
