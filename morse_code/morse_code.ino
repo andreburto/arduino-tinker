@@ -7,12 +7,15 @@
 // VARIABLES
 Morse* m;
 char msg[255];
-int mcnt = 0;
+int mcnt;
 int led = 13;
 
 void setup() {
   // Initialize the Morse object
   m = new Morse(led);
+  
+  // Initialize msg
+  nullMsg();
   
   // Start the serial connection
   Serial.begin(9600);
@@ -32,14 +35,15 @@ void loop() {
         } 
       }
     }
-    Serial.println("1");
+
+    // Slow up the flashing
+    m->setUnit(250);
+
     // Feed the array in
     m->say(msg);
-    Serial.println("1");
+
     // Empty the msg array
     nullMsg();
-    mcnt = 0;
-    Serial.println("1");
   }
 }
 
@@ -47,4 +51,5 @@ void nullMsg() {
   for(int clr = 0; clr < 255; clr++) {
     msg[clr] = '\0';
   }
+  mcnt = 0;
 }
