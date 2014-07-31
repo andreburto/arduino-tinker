@@ -42,3 +42,5 @@ int ClFu::findLetter(char look) {
     }
     return -1;
 }
+
+#endif
